@@ -88,6 +88,13 @@ def cart_remove_product(request, product_id):
 	cart_item.delete()
 	return redirect('cart_detail')
 
+def cart_remove_product1(request, product1_id):
+	cart = Cart.objects.get(cart_id=_cart_id(request))
+	product1 = get_object_or_404(Product1, id=product1_id)
+	cart_item = CartItem.objects.get(product1=product1, cart=cart)
+	cart_item.delete()
+	return redirect('cart_detail')
+
 def signUpView(request):
 	if request.method == 'POST':
 		form = SignUpForm(request.POST)

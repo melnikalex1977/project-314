@@ -67,7 +67,7 @@ class Product1(models.Model):
 	description = models.TextField(blank=True)
 	proba = models.ForeignKey(Proba, on_delete=models.CASCADE)
 	price = models.DecimalField(max_digits=10, decimal_places=2)
-	image = models.ImageField(upload_to='product', blank=True)
+	image = models.ImageField(upload_to='product1', blank=True)
 	stock = models.IntegerField()
 	available = models.BooleanField(default=True)
 	created = models.DateTimeField(auto_now_add=True)
