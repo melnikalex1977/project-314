@@ -14,12 +14,12 @@
   </div> 
   <div class="col-10 mx-auto col-md-6 my-3">
     <div>
-      <h1 class="product1_title">{{product1.name}}</h1>
+      <h1 class="product_title">{{product1.name}}</h1>
       <h5 class="text-info font-italic mb-4">{{product1.price}}</h5>
-      <p class="product1_desc">Product1 Descrition</p>
-      <p class="text-justify product1_text">{{product1.descrition}}</p>
+      <p class="product_desc">Product1 Descrition</p>
+      <p class="text-justify product_text">{{product1.descrition}}</p>
       {% if product1.stock <= 0 %}
-      <p class="text-justify product1_text">Out Of Stock</p>
+      <p class="text-justify product_text">Out Of Stock</p>
       {% else %}
       <a href="{% url 'add_cart' product1.id %}">Add1 To Cart</a>
       {% endif %}

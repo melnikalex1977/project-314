@@ -20,6 +20,6 @@ def menu_links(request):
 	links = Category.objects.all()
 	return dict(links=links)
 
-def menu_links(request):
-	links = Proba.objects.all()
-	return dict(links=links)
+def menu_links1(request):
+	links1 = Proba.objects.all()
+	return dict(links1=links1)
