@@ -9,15 +9,45 @@ from django.contrib.auth import login, authenticate, logout
 
 
 # Create your views here.
-def home(request, category_slug=None):
+def home(request, category_slug=None, proba_slug=None):
 	category_page = None
 	products = None
+	proba_page = None
+	products1 = None
 	if category_slug != None:
 		category_page = get_object_or_404(Category, slug=category_slug)
 		products = Product.objects.filter(category=category_page, available=True)
+	elif proba_slug != None:
+		proba_page = get_object_or_404(Proba, slug=proba_slug)
+		products1 = Product1.objects.filter(proba=proba_page, available=True)
+	elif proba_slug == None:
+	    products1 = Product1.objects.all().filter(available=True)
+	    return render(request, 'home1.html', {'proba':proba_page, 'products1':products1})
 	else:
 		products = Product.objects.all().filter(available=True)
 	return render(request, 'home.html', {'category':category_page, 'products':products})
+
+
+# def home(request, category_slug=None):
+# 	category_page = None
+# 	products = None
+# 	if category_slug != None:
+# 		category_page = get_object_or_404(Category, slug=category_slug)
+# 		products = Product.objects.filter(category=category_page, available=True)
+# 	else:
+# 		products = Product.objects.all().filter(available=True)
+# 	return render(request, 'home.html', {'category':category_page, 'products':products})
+
+# def home1(request, proba_slug=None):
+# 	proba_page = None
+# 	products1 = None
+# 	if proba_slug != None:
+# 		proba_page = get_object_or_404(Proba, slug=proba_slug)
+# 		products1 = Product1.objects.filter(proba=proba_page, available=True)
+# 	else:
+# 		products1 = Product1.objects.all().filter(available=True)
+# 	return render(request, 'home1.html', {'proba':proba_page, 'products1':products1})
+
 
 def product(request, category_slug, product_slug):
 	try:
@@ -81,6 +111,17 @@ def cart_remove(request, product_id):
 		cart_item.delete()
 	return redirect('cart_detail')
 
+def cart_remove1(request, product_id):
+	cart = Cart.objects.get(cart_id=_cart_id(request))
+	product1 = get_object_or_404(Product1, id=product1_id)
+	cart_item = CartItem.objects.get(product1=product1, cart=cart)
+	if cart_item.quantity > 1:
+		cart_item.quantity -= 1
+		cart_item.save()
+	else:
+		cart_item.delete()
+	return redirect('cart_detail')
+
 def cart_remove_product(request, product_id):
 	cart = Cart.objects.get(cart_id=_cart_id(request))
 	product = get_object_or_404(Product, id=product_id)
@@ -127,8 +168,3 @@ def loginView(request):
 def signoutView(request):
 	logout(request)
 	return redirect('login')
-
-
-
-
-

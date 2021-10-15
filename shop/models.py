@@ -109,6 +109,12 @@ class CartItem(models.Model):
 	def __str__(self):
 			return self.product
 
+	def sub_total1(self):
+		return self.product1.price * self.quantity
+
+	def __str__1(self):
+			return self.product1
+
 
 
 
