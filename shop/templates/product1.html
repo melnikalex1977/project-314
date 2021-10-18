@@ -16,14 +16,13 @@
     <div>
       <h1 class="product_title">{{product1.name}}</h1>
       <h5 class="text-info font-italic mb-4">{{product1.price}}</h5>
-      <p class="product_desc">Product Descrition</p>
-      <p class="text-justify product_text">{{product1.descrition}}</p>
+      <p class="product_desc">Product1 Description</p>
+      <p class="text-justify product_text">{{product1.description}}</p>
       {% if product1.stock <= 0 %}
       <p class="text-justify product_text">Out Of Stock</p>
       {% else %}
-      <a href="{% url 'add_cart' product1.id %}">Add To Cart</a>
+      <a href="{% url 'add_cart' product1.id %}">Add To Cart1</a>
       {% endif %}
     </div>
-    
   </div>
 {% endblock %}

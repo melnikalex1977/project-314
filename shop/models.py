@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+
 # Create your models here.
 class Category(models.Model):
 	name = models.CharField(max_length=250, unique=True)
@@ -94,6 +95,16 @@ class Cart(models.Model):
 	def __str__(self):
 			return self.cart_id
 
+class Cart1(models.Model):
+	cart_id = models.CharField(max_length=250, blank=True)
+	date_added = models.DateField(auto_now_add=True)
+	class Meta: 
+		ordering = ['date_added']
+		db_table = 'Cart1'
+
+	def __str__(self):
+			return self.cart_id
+
 class CartItem(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.CASCADE)
 	cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
@@ -109,10 +120,19 @@ class CartItem(models.Model):
 	def __str__(self):
 			return self.product
 
-	def sub_total1(self):
+class CartItem1(models.Model):
+	product1 = models.ForeignKey(Product1, on_delete=models.CASCADE)
+	cart1 = models.ForeignKey(Cart, on_delete=models.CASCADE)
+	quantity = models.IntegerField()
+	active = models.BooleanField(default=True)
+
+	class Meta:
+		db_table = 'CartItem1'
+
+	def sub_total(self):
 		return self.product1.price * self.quantity
 
-	def __str__1(self):
+	def __str__(self):
 			return self.product1
 
 

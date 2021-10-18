@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+  Cart1
+{% endblock %}
+
+{% block content %}
+
+  {% if not cart_items %}
+  <div class="text-center">
+    <br>
+    <h1 class="text-center product_title">
+      Your cart is empty
+    </h1>
+    <br>
+    <p class="text-center">
+      Click <a href="{% url 'home1' %}">here</a> to go back to products1
+    </p>
+  </div> 
+{% else %}
+<div class="text-center">
+  <br>
+  <div class="text-center product_title">
+     Chopping Cart
+  </div>
+</div>
+<div class="row mx-auto">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+    <table class="table cart-table">
+      <thead class="cart-thead">
+        <tr>
+          <th colspan="4">
+              You Items
+          </th>
+        </tr>
+      </thead>
+      {% for cart_item1 in cart_items1 %}
+        <tr>
+          <td>
+            <a href="{{cart_item1.product1.get_url}}">
+             <img src="{{cart_item1.product1.image.url}}" width="100">
+            </a>
+          </td>
+          <td class="text-left">
+            {{cart_item1.product1.name}}
+            <br>
+            SKU: {{cart_item1.product1.id}}
+            <br>
+            Unit Price: {{cart_item1.product1.price}}
+            <br>
+            Quantity: {{cart_item1.quantity}}x{{cart_item.product1.price}}
+          </td>
+          <td>
+            ${{cart_item1.sub_total}}
+          </td>
+          {% if cart_item1.quantity < cart_item1.product1.stock %}
+          <td>
+            <a href="{% url 'add_cart1' cart_item.product1.id %}"><i class="material-icons cart-icon">add_shopping_cart1</i></a>
+            <a href="{% url 'cart_remove1' cart_item.product1.id %}"><i class="material-icons cart-icon">remove_circle_outline</i></a>
+            <a href="{% url 'cart_remove_product1' cart_item.product1.id %}"><i class="material-icons cart-icon">delete</i></a>
+          </td>
+          {% else %}
+          <td>
+            <a href="{% url 'cart_remove1' cart_item1.product1.id %}"><i class="material-icons cart-icon">remove_circle_outline</i></a>
+            <a href="{% url 'cart_remove_product1' cart_item1.product1.id %}"><i class="material-icons cart-icon">delete</i></a>
+          </td>
+          {% endif %}
+  
+        </tr>
+      {% endfor %}
+    </table>
+    </div> 
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+    <table class="table cart-table">
+      <thead class="cart-thead">
+        <tr>
+          <th colspan="4">
+              Chevk Out
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Pleas check your cart befor payment.
+          </td>
+        </tr>
+        <tr class="text-left">
+          <td>
+            Your total bill is: <strong>${{total}}</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+     <div class="mx-auto">
+       <a href="{% url 'home1' %}" style="text-decoration: none;">
+         <button type="button" class="btn btn-lg btn-block bg-dark text-white">
+            Back To Products
+         </button>
+       </a>  
+     </div>
+    </div>   
+  </div> 
+  {% endif %} 
+{% endblock %}
